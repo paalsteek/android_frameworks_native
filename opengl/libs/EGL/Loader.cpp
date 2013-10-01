@@ -207,8 +207,8 @@ void* Loader::open(egl_connection_t* cnx)
             "couldn't find the default OpenGL ES implementation "
             "for default display");
 
-    cnx->libGles2 = load_wrapper("libGLESv2.so");
-    cnx->libGles1 = load_wrapper("libGLESv1_CM.so");
+    cnx->libGles2 = load_wrapper("system/lib/libGLESv2.so");
+    cnx->libGles1 = load_wrapper("system/lib/libGLESv1_CM.so");
     LOG_ALWAYS_FATAL_IF(!cnx->libGles2 || !cnx->libGles1,
             "couldn't load system OpenGL ES wrapper libraries");
 
@@ -326,7 +326,8 @@ void *Loader::load_driver(const char* kind, const char *tag,
          */
         const char *cmdline = getProcessCmdline();
         if (strstr(cmdline, "systemui")) {
-            void *imgegl = dlopen("/vendor/lib/libIMGegl.so", RTLD_LAZY);
+            // Engle, 修复路径
+            void *imgegl = dlopen("/system/lib/libIMGegl.so", RTLD_LAZY);
             if (imgegl) {
                 unsigned int *PVRDefaultPBS =
                         (unsigned int *)dlsym(imgegl, "PVRDefaultPBS");
