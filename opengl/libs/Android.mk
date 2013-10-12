@@ -9,6 +9,12 @@ egl.cfg_config_module :=
 ifneq ($(BOARD_EGL_CFG),)
 
 include $(CLEAR_VARS)
+
+#Engle, add for perforamnce
+ifeq ($(strip $(TARGET_CPU_VARIANT)),cortex-a8)
+	LOCAL_CFLAGS += -O3 -march=armv7-a -mfpu=neon -mfloat-abi=softfp -funroll-loops
+endif
+
 LOCAL_MODULE := egl.cfg
 LOCAL_MODULE_TAGS := optional
 LOCAL_MODULE_CLASS := ETC
@@ -19,6 +25,11 @@ egl.cfg_config_module := $(LOCAL_MODULE)
 endif
 
 include $(CLEAR_VARS)
+
+#Engle, add for perforamnce
+ifeq ($(strip $(TARGET_CPU_VARIANT)),cortex-a8)
+	LOCAL_CFLAGS += -O3 -march=armv7-a -mfpu=neon -mfloat-abi=softfp -funroll-loops
+endif
 
 LOCAL_SRC_FILES:= 	       \
 	EGL/egl_tls.cpp        \
@@ -86,6 +97,11 @@ include $(BUILD_SHARED_LIBRARY)
 
 include $(CLEAR_VARS)
 
+#Engle, add for perforamnce
+ifeq ($(strip $(TARGET_CPU_VARIANT)),cortex-a8)
+	LOCAL_CFLAGS += -O3 -march=armv7-a -mfpu=neon -mfloat-abi=softfp -funroll-loops
+endif
+
 LOCAL_SRC_FILES:= 		\
 	GLES_CM/gl.cpp.arm 	\
 #
@@ -110,6 +126,11 @@ include $(BUILD_SHARED_LIBRARY)
 #
 
 include $(CLEAR_VARS)
+
+#Engle, add for perforamnce
+ifeq ($(strip $(TARGET_CPU_VARIANT)),cortex-a8)
+	LOCAL_CFLAGS += -O3 -march=armv7-a -mfpu=neon -mfloat-abi=softfp -funroll-loops
+endif
 
 LOCAL_SRC_FILES:= 		\
 	GLES2/gl2.cpp.arm 	\
@@ -149,6 +170,11 @@ LIBGLESV3 :=
 
 include $(CLEAR_VARS)
 
+#Engle, add for perforamnce
+ifeq ($(strip $(TARGET_CPU_VARIANT)),cortex-a8)
+	LOCAL_CFLAGS += -O3 -funroll-loops
+endif
+
 LOCAL_SRC_FILES:= 		\
 	ETC1/etc1.cpp 	\
 #
@@ -163,6 +189,11 @@ include $(BUILD_HOST_STATIC_LIBRARY)
 #
 
 include $(CLEAR_VARS)
+
+#Engle, add for perforamnce
+ifeq ($(strip $(TARGET_CPU_VARIANT)),cortex-a8)
+	LOCAL_CFLAGS += -O3 -funroll-loops
+endif
 
 LOCAL_SRC_FILES:= 		\
 	ETC1/etc1.cpp 	\

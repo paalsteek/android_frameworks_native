@@ -1,6 +1,11 @@
 LOCAL_PATH:= $(call my-dir)
 include $(CLEAR_VARS)
 
+#Engle, add for perforamnce
+ifeq ($(strip $(TARGET_CPU_VARIANT)),cortex-a8)
+	LOCAL_CFLAGS += -O3 -march=armv7-a -mfpu=neon -mfloat-abi=softfp -funroll-loops
+endif
+
 LOCAL_SRC_FILES:= \
     Client.cpp \
     DisplayDevice.cpp \
@@ -84,6 +89,12 @@ include $(BUILD_SHARED_LIBRARY)
 # uses jni which may not be available in PDK
 ifneq ($(wildcard libnativehelper/include),)
 include $(CLEAR_VARS)
+
+#Engle, add for perforamnce
+ifeq ($(strip $(TARGET_CPU_VARIANT)),cortex-a8)
+	LOCAL_CFLAGS += -O3 -march=armv7-a -mfpu=neon -mfloat-abi=softfp -funroll-loops
+endif
+
 LOCAL_CFLAGS:= -DLOG_TAG=\"SurfaceFlinger\"
 
 LOCAL_SRC_FILES:= \
